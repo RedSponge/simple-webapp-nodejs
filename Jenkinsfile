@@ -10,7 +10,7 @@ pipeline {
         }
         stage('Get SCM') {
             steps {
-                git scm
+                checkout scm
                 call "cat Jenkinsfile"
             }
         }
