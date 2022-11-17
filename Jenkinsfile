@@ -10,7 +10,7 @@ pipeline {
         }
         stage('Get SCM') {
             steps {
-                checkout scm
+                git 'https://github.com/RedSponge/simple-webapp-nodejs'
                 call "cat Jenkinsfile"
             }
         }
