@@ -1,8 +1,6 @@
+@Library('TheSharedOne')
 pipeline {
     agent any
-    triggers {
-        cron("* * * * *")
-    }
     stages {
         stage("Clean Up") {
             steps {
