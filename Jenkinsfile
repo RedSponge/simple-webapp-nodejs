@@ -7,7 +7,7 @@ pipeline {
             steps {
                 script {
                     def envs = readYaml(text: libraryResource('environments.yml'))
-                    println(request.buildImage)
+                    println(envs.buildImage)
                 }
             }
         }
