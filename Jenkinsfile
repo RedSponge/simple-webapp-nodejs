@@ -10,20 +10,20 @@ pipeline {
         stage('Get SCM') {
             steps {
                 git scm
-                sh "cat Jenkinsfile"
+                call "cat Jenkinsfile"
             }
         }
         stage('Build') {
             steps {
-                sh "docker build -t nodewebapp ."
-                sh "docker images"
+                call "docker build -t nodewebapp ."
+                call "docker images"
             }
         }
         stage('Deploy') {
             steps {
-                sh "docker kill nodewebapp"
-                sh "docker rm nodewebapp"
-                sh "docker run -itd --name nodewebapp -p 8081:3000 nodewebapp:latest"
+                call "docker kill nodewebapp"
+                call "docker rm nodewebapp"
+                call "docker run -itd --name nodewebapp -p 8081:3000 nodewebapp:latest"
             }
         }
     }
