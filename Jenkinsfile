@@ -4,9 +4,11 @@ pipeline {
     agent any
     stages {
         stage("Debug Stage") {
-            script {
-                def envs = readYaml(text: libraryResource('environments.yml'))
-                println(request.buildImage)
+            steps {
+                script {
+                    def envs = readYaml(text: libraryResource('environments.yml'))
+                    println(request.buildImage)
+                }
             }
         }
         stage("Clean Up") {
