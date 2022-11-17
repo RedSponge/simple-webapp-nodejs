@@ -3,6 +3,6 @@ WORKDIR /app
 ADD . .
 
 RUN npm install
-RUN npm run tests
+RUN npm test
 EXPOSE 3000
 CMD ["npm", "run", "start"]
