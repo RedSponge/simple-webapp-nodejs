@@ -1,4 +1,4 @@
-@Library('TheSharedOne')
+@Library('TheSharedOne@latest')
 pipeline {
     agent any
     stages {
