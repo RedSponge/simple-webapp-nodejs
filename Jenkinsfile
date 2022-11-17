@@ -5,8 +5,8 @@ pipeline {
     stages {
         stage("Debug Stage") {
             script {
-                def envs = readYaml(text: libraryResource 'environments.yml')
-                println(request.dev.awsRegion)
+                def envs = readYaml(text: libraryResource('environments.yml'))
+                println(request.buildImage)
             }
         }
         stage("Clean Up") {
