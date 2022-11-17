@@ -1,63 +1,30 @@
 pipeline {
     agent any
     stages {
-        stage("Clean") {
+        stage("Clean Up") {
             steps {
                 cleanWs()
             }
         }
-
-        stage("Clone") {
+        stage('Get SCM') {
             steps {
-                git "https://github.com/RedSPonge/simple-webapp-nodejs.git"
+                git scm
+                sh "cat Jenkinsfile"
             }
         }
-
-        stage("Build") {
+        stage('Build') {
             steps {
-                nodejs("NodeJS 19") {
-                    sh "npm install"
-                }
+                sh "docker build -t nodewebapp ."
+                sh "docker images"
             }
         }
-
-        stage("Test") {
+        stage('Deploy') {
             steps {
-                nodejs("NodeJS 19") {
-                    sh "npm test"
-                }
+                sh "docker kill nodewebapp"
+                sh "docker rm nodewebapp"
+                sh "docker run -itd --name nodewebapp -p 8081:3000 nodewebapp:latest"
             }
         }
     }
 }
-
-// pipeline {
-//     agent any
-//     stages {
-//         stage("Initialize") {
-//             steps {
-//                 cleanWs()
-//             }
-//         }
-//         stage('Get SCM') {
-//             steps {
-//                 git "https://github.com/ranazrad/simple-webapp-nodejs.git"
-//                 sh "cat Jenkinsfile"
-//             }
-//         }
-//         stage('Build') {
-//             steps {
-//                 sh "docker build -t nodewebapp ."
-//                 sh "docker images"
-//             }
-//         }
-//         stage('Deploy') {
-//             steps {
-//                 sh "docker kill nodewebapp"
-//                 sh "docker rm nodewebapp"
-//                 sh "docker run -itd --name nodewebapp -p 8081:3000 nodewebapp:latest &"
-//             }
-//         }
-//     }
-// }
  
