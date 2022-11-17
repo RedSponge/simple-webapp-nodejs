@@ -15,7 +15,7 @@ pipeline {
 
         stage("Build") {
             steps {
-                nodejs("Node 19") {
+                nodejs("NodeJS 19") {
                     sh "npm install"
                 }
             }
@@ -23,7 +23,7 @@ pipeline {
 
         stage("Test") {
             steps {
-                nodejs("Node 19") {
+                nodejs("NodeJS 19") {
                     sh "npm test"
                 }
             }
