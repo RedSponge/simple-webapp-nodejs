@@ -11,20 +11,20 @@ pipeline {
         stage('Get SCM') {
             steps {
                 git 'https://github.com/RedSponge/simple-webapp-nodejs'
-                call "cat Jenkinsfile"
+                runCommand "cat Jenkinsfile"
             }
         }
         stage('Build') {
             steps {
-                call "docker build -t nodewebapp ."
-                call "docker images"
+                runCommand "docker build -t nodewebapp ."
+                runCommand "docker images"
             }
         }
         stage('Deploy') {
             steps {
-                call "docker kill nodewebapp"
-                call "docker rm nodewebapp"
-                call "docker run -itd --name nodewebapp -p 8081:3000 nodewebapp:latest"
+                runCommand "docker kill nodewebapp"
+                runCommand "docker rm nodewebapp"
+                runCommand "docker run -itd --name nodewebapp -p 8081:3000 nodewebapp:latest"
             }
         }
     }
